@@ -123,8 +123,12 @@ main_page_content = '''
 # A single movie entry html template
 movie_tile_content = '''
 <div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="{trailer_youtube_id}" data-toggle="modal" data-target="#trailer">
-    <img src="{poster_image_url}" width="220" height="342">
+    <img src="{poster_image_url}" width="220" height="342" data-toggle="tooltip" title="{synopsis}">
     <h2>{movie_title}</h2>
+    <div>
+        <strong>Release Date:</strong> {release_date}<br>
+        <strong>Duration:</strong> {duration}
+    </div>
 </div>
 '''
 
@@ -145,7 +149,10 @@ def create_movie_tiles_content(movies):
         content += movie_tile_content.format(
             movie_title=movie.media_name,
             poster_image_url=movie.media_image,
-            trailer_youtube_id=trailer_youtube_id
+            trailer_youtube_id=trailer_youtube_id,
+            release_date=movie.media_release_date,
+            duration=movie.media_length,
+            synopsis=movie.movie_storyline
         )
     return content
 
